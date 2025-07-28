@@ -35,16 +35,16 @@ resource "openstack_networking_router_interface_v2" "router_internet_interface" 
   subnet_id = openstack_networking_subnet_v2.wan_subnet.id
 }
 
-resource "openstack_networking_network_v2" "lan_network" { # local name used for reference
-  name           = "LAN-terraform"                         # name used in ovh
-  admin_state_up = true
-}
-
-resource "openstack_networking_subnet_v2" "lan_subnet" {
-  name       = "LAN-terraform"
-  network_id = openstack_networking_network_v2.lan_network.id
-  cidr       = "172.16.2.0/24"
-}
+#resource "openstack_networking_network_v2" "lan_network" { # local name used for reference
+#  name           = "LAN-terraform"                         # name used in ovh
+#  admin_state_up = true
+#}
+#
+#resource "openstack_networking_subnet_v2" "lan_subnet" {
+#  name       = "LAN-terraform"
+#  network_id = openstack_networking_network_v2.lan_network.id
+#  cidr       = "172.16.2.0/24"
+#}
 
 # use the external network pool of ip to create a floating ip
 #resource "openstack_networking_floatingip_v2" "integration_compute_floating_ip" {

@@ -19,7 +19,7 @@ resource "openstack_compute_instance_v2" "integration" {
   key_pair = openstack_compute_keypair_v2.keypair.name
   security_groups = ["default"]
   network {
-    uuid = openstack_networking_network_v2.lan_network.id
+    uuid = openstack_networking_network_v2.wan_network.id
   }
 }
 
