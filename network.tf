@@ -3,6 +3,11 @@ data "openstack_networking_network_v2" "ext_net" {
   name = "Ext-Net"
 }
 
+# get the existing external subnet
+data "openstack_networking_subnet_ids_v2" "ext_subnets" {
+  network_id = data.openstack_networking_network_v2.ext_net.id
+}
+
 # create router linking to ext-net network
 resource "openstack_networking_router_v2" "router_internet" {
   name        = "router-internet"
@@ -40,3 +45,9 @@ resource "openstack_networking_subnet_v2" "lan_subnet" {
   network_id = openstack_networking_network_v2.lan_network.id
   cidr       = "172.16.2.0/24"
 }
+
+# use the external network pool of ip to create a floating ip
+#resource "openstack_networking_floatingip_v2" "integration_compute_floating_ip" {
+#  pool  = data.openstack_networking_network_v2.ext_net.name
+#  subnet_ids = data.openstack_networking_subnet_ids_v2.ext_subnets.ids
+#}
