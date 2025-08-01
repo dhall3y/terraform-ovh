@@ -1,6 +1,6 @@
 resource "openstack_compute_keypair_v2" "keypair" {
   name       = "keypair"
-  public_key = file("~/.ssh/gitlab.pub") # we can use file or directly put the public key
+  public_key = file("~/.ssh/main-27042025.pub") # we can use file or directly put the public key
 }
 
 data "openstack_images_image_v2" "integration_compute_image" {
