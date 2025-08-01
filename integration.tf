@@ -14,13 +14,15 @@ data "openstack_compute_flavor_v2" "integration_compute" {
 resource "openstack_compute_instance_v2" "integration" {
   name = "integration-rocky"
 
-  image_id = data.openstack_images_image_v2.integration_compute_image.id
-  flavor_id = data.openstack_compute_flavor_v2.integration_compute.id
-  key_pair = openstack_compute_keypair_v2.keypair.name
+  image_id        = data.openstack_images_image_v2.integration_compute_image.id
+  flavor_id       = data.openstack_compute_flavor_v2.integration_compute.id
+  key_pair        = openstack_compute_keypair_v2.keypair.name
   security_groups = ["default"]
   network {
     uuid = openstack_networking_network_v2.wan_network.id
   }
+
+  user_data = file("test.sh")
 }
 
 # to attach a floating ip to an instance we need a port to attach the floatin ip to
